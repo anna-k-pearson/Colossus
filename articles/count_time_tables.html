@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Generating Person-Count and Person-Time Tables • Colossus</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">Colossus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,9 +49,10 @@
     <li><a class="dropdown-item" href="../articles/Matched_Case_Control.html">Matched Case-Control Logistic Regression</a></li>
     <li><a class="dropdown-item" href="../articles/Multi_Realization.html">Multiple Realization Methods</a></li>
     <li><a class="dropdown-item" href="../articles/Plotting_And_Analysis.html">Functions for Plotting and Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/Residual.html">Poisson and Logistic Residuals</a></li>
     <li><a class="dropdown-item" href="../articles/Script_Comparison_Epicure.html">Script comparisons with 32-bit Epicure</a></li>
     <li><a class="dropdown-item" href="../articles/SMR_Analysis.html">SMR Analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/Starting-Description.html">Colossus Description</a></li>
+    <li><a class="dropdown-item" href="../articles/Starting-Description.html">Colossus Starting Description</a></li>
     <li><a class="dropdown-item" href="../articles/Time_Dep_Cov.html">Time Dependent Covariate Use</a></li>
     <li><a class="dropdown-item" href="../articles/Wald_and_Log_Bound.html">Confidence Interval Selection</a></li>
   </ul>
@@ -70,8 +76,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Generating Person-Count and Person-Time Tables</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Generating Person-Count and Person-Time Tables</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ericgiunta/Colossus/blob/main/vignettes/count_time_tables.Rmd" class="external-link"><code>vignettes/count_time_tables.Rmd</code></a></small>
@@ -271,7 +276,7 @@ denote the scenario where every interval ends at the same point, starts
 at the same point, or has different start and stop times. There are two
 formats of time allowed, calendar and user scale.</p>
 <p>Calendar time data is listed in day, month, and year columns which
-are combined into dates. User time data is interpreted as durations
+are combined into dates. User time data is interpreted as duration
 observed, without any inherent units. These apply to both a person-year
 list, which specifies the entry and exit columns, as well as the time
 categories which split the data into intervals. For the calendar time
@@ -311,7 +316,7 @@ years. For the following example, we will use a calendar time scale.</p>
 <span>  g <span class="op">=</span> <span class="va">g</span>, h <span class="op">=</span> <span class="va">h</span>, i <span class="op">=</span> <span class="va">i</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>In general, the person-year list should contain the columns used for
-the entry and/or exit dates as well as an options units value. Each
+the entry and/or exit dates as well as an optional units value. Each
 entry or exit variable should be a list with columns corresponding to
 the calendar date columns. These columns should be named ‘day’, ‘month’,
 or ‘year’. As already mentioned, missing entries will currently default
@@ -513,7 +518,7 @@ boundaries.</p>
 <div class="section level4">
 <h4 id="user-defined-time-scale">User Defined Time Scale<a class="anchor" aria-label="anchor" href="#user-defined-time-scale"></a>
 </h4>
-<p>As previously mentioned, the time scale can also be durations with
+<p>As previously mentioned, the time scale can also be a duration with
 arbitrary units. This is particularly important if the study is using
 follow-up time and there is no need to translate to calendar points. The
 differences start with the person-year list. In this case the entry and
@@ -525,7 +530,7 @@ observation.</p>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Instead of calendar dates, we may have entry and exit durations</span></span>
+<span><span class="co"># Instead of calendar dates, we may have entry and exit duration</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">60</span><span class="op">)</span></span>
 <span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">11</span>, <span class="fl">22</span>, <span class="fl">22</span>, <span class="fl">30</span>, <span class="fl">30</span>, <span class="fl">45</span>, <span class="fl">45</span>, <span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">70</span>, <span class="fl">80</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span></span>
 <span></span>
@@ -534,7 +539,7 @@ observation.</p>
 <span>  d <span class="op">=</span> <span class="va">d</span>, e <span class="op">=</span> <span class="va">e</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># When we have durations instead of calendar dates, our person-year</span></span>
+<span><span class="co"># When we have duration instead of calendar dates, our person-year</span></span>
 <span><span class="co"># list should only have a single entry, instead of lists of columns.</span></span>
 <span><span class="va">pyr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>entry <span class="op">=</span> <span class="st">"d"</span>, exit <span class="op">=</span> <span class="st">"e"</span><span class="op">)</span></span></code></pre></div>
 <p>Next, we define the time categories. The only accepted time category
@@ -552,7 +557,7 @@ categories.</p>
 <span></span>
 <span><span class="co"># Here we are defining the duration categories to use.</span></span>
 <span><span class="co"># This will create two columns, 'time' and 'time_bin'.</span></span>
-<span><span class="co"># 'time' is the average duration between the entry and exit durations.</span></span>
+<span><span class="co"># 'time' is the average duration between the entry and exit duration.</span></span>
 <span><span class="co"># 'time_bin' is the category value.</span></span>
 <span><span class="co"># We can use 'time' to find the average duration in each group.</span></span>
 <span><span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"time AS time_bin"</span> <span class="op">=</span> <span class="st">"0 / 10 / 50 / 100"</span><span class="op">)</span></span></code></pre></div>
